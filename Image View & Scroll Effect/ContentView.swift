@@ -29,7 +29,7 @@ struct ContentView: View {
                                         .clipShape(RoundedRectangle(cornerRadius: 16))
                                         .containerRelativeFrame(.horizontal, count: 1, spacing: 32)
                                         .onChange(of: selectedImage) { oldValue, newValue in
-                                            withAnimation(.bouncy(duration: 0.2)){
+                                            withAnimation {
                                                 select.scrollTo(selectedImage)
                                             }
                                         }
