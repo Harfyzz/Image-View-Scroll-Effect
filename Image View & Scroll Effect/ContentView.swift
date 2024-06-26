@@ -49,7 +49,7 @@ struct ContentView: View {
                 
                 
                 ScrollView(.horizontal){
-                    HStack{
+                    HStack(spacing:-12){
                         ForEach (images, id: \.self) {
                             image in
                             Image(image)
@@ -57,6 +57,10 @@ struct ContentView: View {
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width:selectedImage == image && isSelected ? 100 : 64, height: 64)
                                 .clipShape(RoundedRectangle(cornerRadius: 8))
+                                .overlay{
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .stroke(.white, lineWidth: 3)
+                                }
                                 .onTapGesture {
                                     withAnimation(.bouncy){
                                         selectedImage = image
