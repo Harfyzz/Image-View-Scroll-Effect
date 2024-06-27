@@ -7,20 +7,23 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct ScrollingView: View {
     
     @Binding var selectedImage:String
     @State var isSelected = false
     var nameSpace:Namespace.ID
     @Binding var isOpen:Bool
+    @Binding var imageShowcase:viewing
     
-   
     var body: some View {
         GeometryReader { proxy in
             VStack{
                 Button("Close") {
-                    withAnimation (.bouncy(duration: 0.2)){
+                    withAnimation (.bouncy(duration: 0.3)){
                         isOpen = false
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                            imageShowcase = .base
+                        }
                     }
                     
                 }
@@ -33,17 +36,15 @@ struct ContentView: View {
                                 Image(image)
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
-                                    .matchedGeometryEffect(id: image, in: nameSpace)
+                                    .matchedGeometryEffect(id: image, in: nameSpace,isSource: selectedImage == image)
                                     .frame(width: (proxy.size.width) - 32, height: 600)
                                     .clipShape(RoundedRectangle(cornerRadius: 16))
                                     .containerRelativeFrame(.horizontal, count: 1, spacing: 32)
                                     .onChange(of: selectedImage) { oldValue, newValue in
-                                        withAnimation {
-                                            select.scrollTo(selectedImage)
-                                        }
+                                        select.scrollTo(selectedImage)
                                     }
                                     .onAppear{
-                                            select.scrollTo(selectedImage)
+                                        select.scrollTo(selectedImage)
                                     }
                                 
                                 
@@ -54,13 +55,15 @@ struct ContentView: View {
                         
                         
                     }
-                }.contentMargins(16, for: .scrollContent)
-                    .scrollIndicators(.hidden)
-                    .scrollTargetBehavior(.viewAligned)
+                }
+                .contentMargins(16, for: .scrollContent)
+                .scrollIndicators(.hidden)
+                .scrollTargetBehavior(.viewAligned)
+                
                 
                 ScrollView(.horizontal){
                     let gallery = ImageGridView()
-                    HStack(spacing:-12){
+                    HStack(spacing:4){
                         ForEach (gallery.images, id: \.self) {
                             image in
                             imageThumbnail(image: image, isSelected: $isSelected, selectedImage: $selectedImage)

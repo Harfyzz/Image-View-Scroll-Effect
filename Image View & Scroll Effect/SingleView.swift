@@ -27,6 +27,7 @@ struct SingleView: View {
                                     .matchedGeometryEffect(id: selectedImage, in: animation)
                                     .frame(width: proxy.size.width - 32, height: 600)
                                     .clipShape(RoundedRectangle(cornerRadius: 16))
+                                    .padding(.vertical)
                             
                         
                     
@@ -34,15 +35,13 @@ struct SingleView: View {
                 
                 ScrollView(.horizontal){
                     let gallery = ImageGridView()
-                    HStack(spacing:-12){
+                    HStack(spacing:4){
                         ForEach (gallery.images, id: \.self) {
                             image in
                             imageThumbnail(image: image, isSelected: $isSelected, selectedImage: $selectedImage)
                                 .onTapGesture {
-                                    withAnimation(.bouncy){
                                         selectedImage = image
                                         isSelected = true
-                                    }
                                 }
                             
                         }

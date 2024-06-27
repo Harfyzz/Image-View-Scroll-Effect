@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		3459D4092C2D6C0E0095B0D6 /* SingleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3459D4082C2D6C0E0095B0D6 /* SingleView.swift */; };
 		34B5056C2C2C150C00ACF2DA /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B5056B2C2C150C00ACF2DA /* ImageView.swift */; };
-		34B5056E2C2C150C00ACF2DA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B5056D2C2C150C00ACF2DA /* ContentView.swift */; };
+		34B5056E2C2C150C00ACF2DA /* ScrollingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B5056D2C2C150C00ACF2DA /* ScrollingView.swift */; };
 		34B505702C2C150E00ACF2DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34B5056F2C2C150E00ACF2DA /* Assets.xcassets */; };
 		34B505732C2C150E00ACF2DA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34B505722C2C150E00ACF2DA /* Preview Assets.xcassets */; };
 		34B5057A2C2C562400ACF2DA /* ImageGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B505792C2C562400ACF2DA /* ImageGridView.swift */; };
@@ -19,7 +19,7 @@
 		3459D4082C2D6C0E0095B0D6 /* SingleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleView.swift; sourceTree = "<group>"; };
 		34B505682C2C150C00ACF2DA /* Image View & Scroll Effect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Image View & Scroll Effect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34B5056B2C2C150C00ACF2DA /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
-		34B5056D2C2C150C00ACF2DA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		34B5056D2C2C150C00ACF2DA /* ScrollingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingView.swift; sourceTree = "<group>"; };
 		34B5056F2C2C150E00ACF2DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		34B505722C2C150E00ACF2DA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		34B505792C2C562400ACF2DA /* ImageGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGridView.swift; sourceTree = "<group>"; };
@@ -56,7 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				34B5056B2C2C150C00ACF2DA /* ImageView.swift */,
-				34B5056D2C2C150C00ACF2DA /* ContentView.swift */,
+				34B5056D2C2C150C00ACF2DA /* ScrollingView.swift */,
 				34B505792C2C562400ACF2DA /* ImageGridView.swift */,
 				3459D4082C2D6C0E0095B0D6 /* SingleView.swift */,
 				34B5056F2C2C150E00ACF2DA /* Assets.xcassets */,
@@ -145,7 +145,7 @@
 			files = (
 				3459D4092C2D6C0E0095B0D6 /* SingleView.swift in Sources */,
 				34B5057A2C2C562400ACF2DA /* ImageGridView.swift in Sources */,
-				34B5056E2C2C150C00ACF2DA /* ContentView.swift in Sources */,
+				34B5056E2C2C150C00ACF2DA /* ScrollingView.swift in Sources */,
 				34B5056C2C2C150C00ACF2DA /* ImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
