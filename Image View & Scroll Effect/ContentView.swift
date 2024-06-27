@@ -9,72 +9,96 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var selectedImage = ""
+    @Binding var selectedImage:String
     @State var isSelected = false
+    var nameSpace:Namespace.ID
+    @Binding var isOpen:Bool
     
-    var images = ["Image 1","Image 2","Image 3","Image 4","Image 5","Image 6","Image 7","Image 8"]
+   
     var body: some View {
         GeometryReader { proxy in
             VStack{
-                
+                Button("Close") {
+                    withAnimation (.bouncy(duration: 0.2)){
+                        isOpen = false
+                    }
+                    
+                }
                 ScrollView(.horizontal){
                     ScrollViewReader{ select in
-                       
-                            HStack{
-                                ForEach (images, id: \.self) { image in
-                                    Image(image)
-                                        .resizable()
-                                        .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
-                                        .frame(width: (proxy.size.width) - 32, height: 600)
-                                        .clipShape(RoundedRectangle(cornerRadius: 16))
-                                        .containerRelativeFrame(.horizontal, count: 1, spacing: 32)
-                                        .onChange(of: selectedImage) { oldValue, newValue in
-                                            withAnimation {
-                                                select.scrollTo(selectedImage)
-                                            }
+                        let gallery = ImageGridView()
+                        HStack{
+                            ForEach (gallery.images, id: \.self) { image in
+                                
+                                Image(image)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .matchedGeometryEffect(id: image, in: nameSpace)
+                                    .frame(width: (proxy.size.width) - 32, height: 600)
+                                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                                    .containerRelativeFrame(.horizontal, count: 1, spacing: 32)
+                                    .onChange(of: selectedImage) { oldValue, newValue in
+                                        withAnimation {
+                                            select.scrollTo(selectedImage)
                                         }
-                                    
-                                }
-                            }.scrollTargetLayout()
+                                    }
+                                    .onAppear{
+                                            select.scrollTo(selectedImage)
+                                    }
+                                
+                                
+                                
+                            }
+                        }.scrollTargetLayout()
+                        
                         
                         
                     }
                 }.contentMargins(16, for: .scrollContent)
                     .scrollIndicators(.hidden)
                     .scrollTargetBehavior(.viewAligned)
-                    .onChange(of: selectedImage) { oldValue, newValue in
-                        
-                    }
-                    
-                
                 
                 ScrollView(.horizontal){
+                    let gallery = ImageGridView()
                     HStack(spacing:-12){
-                        ForEach (images, id: \.self) {
+                        ForEach (gallery.images, id: \.self) {
                             image in
-                            Image(image)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width:selectedImage == image && isSelected ? 100 : 64, height: 64)
-                                .clipShape(RoundedRectangle(cornerRadius: 8))
-                                .overlay{
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .stroke(.white, lineWidth: 3)
-                                }
+                            imageThumbnail(image: image, isSelected: $isSelected, selectedImage: $selectedImage)
                                 .onTapGesture {
                                     withAnimation(.bouncy){
                                         selectedImage = image
                                         isSelected = true
                                     }
                                 }
-                                
+                            
                         }
                     }
                 }.scrollIndicators(.hidden)
             }
         }.padding(.vertical,32)
     }
+    
 }
-#Preview {
-    ContentView()
+
+
+struct imageThumbnail: View {
+    
+    @State var image:String
+    @Binding var isSelected:Bool
+    @Binding var selectedImage:String
+    var body: some View {
+        Image(image)
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(width:selectedImage == image && isSelected ? 100 : 64, height: 64)
+            .clipShape(RoundedRectangle(cornerRadius: 8))
+            .overlay{
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(.white, lineWidth: 3)
+            }
+            .onAppear{
+                isSelected = true
+            }
+        //.rotationEffect(.degrees(Double.random(in: -25...25)))
+    }
 }
