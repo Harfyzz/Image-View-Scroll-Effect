@@ -33,20 +33,36 @@ struct SingleView: View {
                     
                 
                 
+                
                 ScrollView(.horizontal){
-                    let gallery = ImageGridView()
-                    HStack(spacing:4){
-                        ForEach (gallery.images, id: \.self) {
-                            image in
-                            imageThumbnail(image: image, isSelected: $isSelected, selectedImage: $selectedImage)
-                                .onTapGesture {
-                                        selectedImage = image
-                                        isSelected = true
-                                }
-                            
+                    ScrollViewReader{ reader in
+                        let gallery = ImageGridView()
+                        HStack(spacing:4){
+                            ForEach (gallery.images, id: \.self) {
+                                image in
+                                imageThumbnail(image: image, isSelected: $isSelected, selectedImage: $selectedImage)
+                                    .onTapGesture {
+                                        withAnimation(.bouncy){
+                                            selectedImage = image
+                                            isSelected = true
+                                        }
+                                    }
+                                
+                            }
+                        }.onChange(of: selectedImage) { oldValue, newValue in
+                            withAnimation(.spring()){
+                                reader.scrollTo(selectedImage,anchor: .center)
+                            }
+                        }
+                        .onAppear{
+                            withAnimation(.spring()){
+                                reader.scrollTo(selectedImage,anchor: .center)
+                            }
                         }
                     }
                 }.scrollIndicators(.hidden)
+                    .padding(.horizontal, 16)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
             }
         }.padding(.vertical,32)
     }
